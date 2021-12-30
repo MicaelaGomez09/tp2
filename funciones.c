@@ -1,83 +1,64 @@
-int getInt(char mensaje[])
-{
-    int aux; //variable int que contendrï¿½ el valor de mensaje
-    printf("%s", mensaje);//solicita un string
-    scanf("%d", &aux);//toma el string y lo guarda tido %d en la variable
-    return aux;// retorna la variable con el dato guardado
-}
 
-int esNumerico(char str[])
+//MENUU////////
+void mostrarMenu()
 {
-    int i = 0;
-    while(str[i] != '\0')
-    {
-        if(str[i] < '0' || str[i] > '9')
-            return 0;
-        i++;
+    printf("\n                                               +---------------------------+      \n");
+    printf("                                           ¦            Menu de opciones           ¦\n");
+    printf("                                           +---------------------------------------+\n");
+    printf("                                           -----------------------------------------\n");
+    printf("                                           ¦  1-AGREGAR PERSONA                    ¦\n");
+    printf("                                           ¦  2-BORRAR PERSONA                     ¦\n");
+    printf("                                           ¦  3-IMPRIMIR LISTA ORDENADA POR NOMBRE ¦\n");
+    printf("                                           ¦  4-IMPRIMIR GRAFICO DE EDADES         ¦\n");
+    printf("                                           ¦  5-BORRADO LOGICO                     ¦\n");
+    printf("                                           ¦  6-SALIR                              ¦\n");
+    printf("                                           -----------------------------------------\n");
+    printf("                                           ELEGIR NUMERO DE OPERACION: ");
+
+}
+////// INICIALIZACION////
+void inicializarArray(persona agenda[20]){
+    for(int i = 0 ; i < 20 ; i++){
+       strcpy(agenda[i].nombre,"vacio");
+       agenda[i].edad = 0;
+       agenda[i].dni = 0;
+
+       agenda[i].estado = VACIO;
     }
-    return 1;
 }
+//ingreso////
+void ingreso(persona agenda[20]){
+    printf("Ingrese los datos: \n");
+    for(int i = 0 ; i < 20 ; i++){
+        if(agenda[i].estado == VACIO){
+            printf("NOMBRE : "  );
+            scanf("%s" , agenda[i].nombre);
 
-int getSoloNumeros(char mensaje[], char input[])
-{
-    char aux[256];
-    getString(mensaje, aux);
-    if(esNumerico(aux))
-    {
-        strcpy(input, aux);
-        return 1;
-    }
-    return 0;
-}
+            printf("EDAD" : "  );
+            scanf("%d" , &agenda[i].edad);
 
-int esSoloLetras(char str[])
-{
-    int i=0;
-    while(str[i] != '\0')
-    {
-        if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
-            return 0;
-        i++;
-    }
-    return 1;
-}
+            printf("DNI : "  );
+            scanf("%d" , &agenda[i].dni);
 
-int getSoloLetras(char mensaje[], char input[])
-{
-  char datoIngresado[256];
-  getString(mensaje, datoIngresado);//(placeholder, &duardado_en)
-  if(esSoloLetras(datoIngresado)) //si lo que ingresÃ³ el usuario son solo letras
-  {
-    strcpy(input, datoIngresado);//copiamos el dato ingresado en 'inpu'
-    return 1;
-  }
-  return 0;
-}
-
-void getString(char mensaje[], char input[])
-{
-  printf("%s", mensaje);
-  scanf("%s", input);
-}
-
-void ordenar(int array[Q_PERSONAS])
-{
-    for(int i =0; i < Q_PERSONAS; i++)
-    {
-        int estaOk = 0;//flag para evitar iteraciones innecesarias
-        for(int j =0; j < Q_PERSONAS -1 -i; j++)//el -i evita comparar con las ultimas posiciones q ya sabemos q fueron ordenadas
-        {
-            if(vector[j] > vector[j+1])
-            {
-                int aux = vector[j];
-                vector[j] = vector[j+1];
-                vector[j+1] = aux;
-                estaOk = 1;//indica q no esta OK
-            }
-        }
-        if(estaOk == 0)//pregunta final del flag
-        {
+            agenda[i].estado = ACTIVO;
             break;
+
         }
     }
+
 }
+////MOSTRAR LISTA
+void mostrar(persona agenda[20]){
+    printf("Lista de personas\n");
+    for(int i = 0 ; i < 20 ; i++){
+        printf("%s %d %s %d %d\n",
+               agenda[i].nombre,
+               agenda[i].edad,
+               agenda[i].dni,
+               agenda[i].estado,
+
+               );
+    }
+}
+
+

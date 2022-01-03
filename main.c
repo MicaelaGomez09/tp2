@@ -10,6 +10,7 @@
 
 struct nada{
     char nombre [50] ;
+    char apellido[50];
     int edad;
     int dni;
 
@@ -44,20 +45,29 @@ int main()
     int lugarDisponible;
 
     int op = 0;
-    do{
+    while(op != 7)
+        {
         system("cls");
+    system("color 0B");
+    printf("\n");
+    printf("                                  _____    _____     ______   ___   __    _____     _____    \n");
+    printf("                                 |  _  |  |  ___|   |   ___| |   | |  |  |     |   |  _  |  \n");
+    printf("                                 |     |  | |  __   |  |__   |    ||  |  |  ||  |  |     |  \n");
+    printf("                                 |  _  |  | | |_ |  |   __|  |        |  |  ||  |  |  _  |  \n");
+    printf("                                 | | | |  | |__| |  |  |___  |  ||    |  |      |  | | | |  \n");
+     printf("                                 |_| |_|  |______|  |______| |__| |___|  |_____/   |_| |_|  \n\n\n\n");
         printMenu();
         scanf("%d", &op);
         switch(op){
             case 1 :
                 system("cls");
                 alta(agenda);
-               // getch();
+                system ("cls");
                 break;
             case 2 :
                 system("cls");
                 baja(agenda);
-               // getch();
+                system ("cls");
                 break;
             case 3 :
                 system("cls");
@@ -76,31 +86,50 @@ int main()
                 break;
             case 6 :
                 system("cls");
+                init(agenda);
                 mostrar(agenda);
                 getch();
                 break;
+    case 7 :
+
+            break;
+
+        default:
+            printf("Valor ingresado fuera de rango ");
+            system("pause");
+        }
         }
 
-    }while(op!= 7);
+
     return 0;
 }
 /////////////////////////////////////////////////////////////
 void printMenu(){
-    printf("MENU AGENDA2 \n");
-    printf("1.AGREGAR PERSONA \n");
-    printf("2.BORRAR PERSONA \n");
-    printf("3.IMPRIMIR LISTA \n");
-    printf("4.IMPRIMIR LISTA ORDENADA POR NOMBRE \n");
-    printf("5.IMPRIMIR GRAFICO \n");
-    printf("6.BORRADO LOGICO \n");
-    printf("7.Salir \n\n");
+   printf("\n                                           +---------------------------+\n");
+    printf("                                           ¦      Menu de opciones     ¦\n");
+    printf("                                           +---------------------------+\n");
+    printf("                                           -----------------------------\n");
+    printf("                                           ¦  1-AGREGAR PERSONA        ¦\n");
+    printf("                                           ¦  2-BORRAR PERSONA         ¦\n");
+    printf("                                           ¦  3-IMPRIMIR LISTA         ¦\n");
+    printf("                                           ¦  4-LISTA ORDENADA         ¦\n");
+    printf("                                           ¦  5-IMPRIMIR GRAFICO       ¦\n");
+    printf("                                           ¦  6-BORRADO LOGICO         ¦\n");
+    printf("                                           ¦  7-SALIR                  ¦\n");
+    printf("                                           -----------------------------\n");
+    printf("                                           ELEGIR NUMERO DE OPERACION: ");
 }
 
 ////////////////////////////////////////////////////////////
 void alta(nada agenda[10]){
+    char nombre;
     printf("Ingrese los datos: \n");
     for(int i = 0 ; i < MAX ; i++){
         if(agenda[i].status == VACIO){
+
+            printf("APELLIDO : "  );
+            scanf("%s" , agenda[i].apellido);
+
             printf("NOMBRE : "  );
             scanf("%s" , agenda[i].nombre);
 
@@ -126,6 +155,7 @@ void baja(nada agenda[10]){
     if(posicion != -1 ){
       agenda[posicion].status = BORRADO;
       strcpy(agenda[posicion].nombre,"vacio");
+      strcpy(agenda[posicion].apellido,"vacio");
       agenda[posicion].edad =0;
       agenda[posicion].dni =0;
     }else{
@@ -139,20 +169,30 @@ int buscar(nada agenda[10])
     int posicion = -1;
 
     char nombre2[50];
+    char apellido2[50];
     int edad2;
+    int dni2;
 
 
 
-    printf("nombre : " );
+    printf("APELLIDO : " );
+    scanf("%s",apellido2);
+
+    printf("NOMBRE : " );
     scanf("%s",nombre2);
 
-   printf("edad : ");
+    printf("edad : ");
     scanf("%d",&edad2);
+
+    printf("dni : ");
+    scanf("%d",&dni2);
 
       for(int i = 0 ; i < 10 ; i++){
         if(agenda[i].status == ACTIVO &&
-           strcmp(agenda[i].nombre , nombre2) == 0 &&
-           agenda[i].edad == edad2){
+           strcmp(agenda[i].nombre , nombre2)==0 &&
+           strcmp(agenda[i].apellido , apellido2) == 0 &&
+           agenda[i].edad == edad2 &&
+           agenda[i].dni == dni2){
            posicion = i;
            break;
         }
@@ -165,6 +205,7 @@ int buscar(nada agenda[10])
 void init(nada agenda[10]){
     for(int i = 0 ; i < MAX ; i++){
        strcpy(agenda[i].nombre,"vacio");
+       strcpy(agenda[i].apellido,"vacio");
        agenda[i].edad = 0;
        agenda[i].dni = 0;
 
@@ -173,9 +214,12 @@ void init(nada agenda[10]){
 }
 ////////////////////////////////////////////////////////////////////
 void mostrar(nada agenda[10]){
-    printf("Listado de todos los datos\n");
+      printf("\n                                           +---------------------------+\n");
+        printf("                                           ¦      LISTADO DE DATOS     ¦\n");
+        printf("                                           +---------------------------+\n");
     for(int i = 0 ; i < MAX ; i++){
-        printf("%s %d %d %d\n",
+        printf("                                           %s   %s   %d    %d    %d\n",
+               agenda[i].apellido,
                agenda[i].nombre,
                agenda[i].edad,
                agenda[i].dni,
@@ -185,27 +229,14 @@ void mostrar(nada agenda[10]){
     }
 }
 
-///////////////////////////////////////////////////////////////
-
-//colocar structura auxiliar para ordenar
-void colocarAux(nada agendaaux[10], nada agenda[10])
-{
-    for (int i = 0; i < MAX; i++)
-    {
-        strcpy(agendaaux[i].nombre, agenda[i].nombre);
-        agendaaux[i].edad = agenda[i].edad;
-        agendaaux[i].dni = agenda[i].dni;
-        agendaaux[i].status = agenda[i].status;
-    }
-}
-
 
 void ordenarNombre(nada agenda [MAX]){
 
    for(int i=0; i<10 ; i++){
         for(int j=0; j<9; j++){
-    if(strcmp(agenda[j].nombre,agenda[j+1].nombre)>0)
+    if(strcmp(agenda[j].apellido,agenda[j+1].apellido)>0)
     {
+        char auxa[10];
         char auxn[10];
         int auxe;
         int auxd;
@@ -213,6 +244,10 @@ void ordenarNombre(nada agenda [MAX]){
         strcpy(auxn, agenda[j].nombre);
         strcpy(agenda[j].nombre,agenda[j+1].nombre);
         strcpy(agenda[j+1].nombre,auxn);
+        //ordena apellido
+        strcpy(auxa, agenda[j].apellido);
+        strcpy(agenda[j].apellido,agenda[j+1].apellido);
+        strcpy(agenda[j+1].apellido,auxa);
         //ordena edad
         auxe=agenda[j].edad;
         agenda[j].edad=agenda[j+1].edad;
@@ -226,9 +261,12 @@ void ordenarNombre(nada agenda [MAX]){
     }
    }
    }
-   printf("Listado datos ordenados\n");
+      printf("\n                                      +-----------------------------------------------+\n");
+        printf("                                      ¦     LISTADO DE DATOS ORDENADOS POR NOMBRE     ¦\n");
+        printf("                                      +-----------------------------------------------+\n");
     for(int i = 0 ; i < MAX ; i++){
-        printf("%s \n",
+        printf("                                                      %s %s \n ",
+               agenda[i].apellido,
                agenda[i].nombre);
     }
 }
@@ -240,62 +278,56 @@ void ordenarNombre(nada agenda [MAX]){
 
 
 void Grafico(nada agenda [MAX]) {
-     int menores =0;
-     int adultos =0;
-     int mayores =0;
 
-     for(int i=0; i<MAX; i++){
+    int menores = 0;
+    int adultos = 0;
+    int mayores = 0;
+
+    for( int i = 0 ; i < MAX ; i++ ) {
         if(agenda[i].status == ACTIVO){
-            if(agenda[i].edad <=18){
+            if(agenda[i].edad <= 18) {
                 menores++;
-            }else if(agenda[i].edad>18&&agenda[i].edad<=35){
-            adultos++;
-            }else if(agenda[i].edad>35){
-            mayores++;
+            } else if(agenda[i].edad > 18 && agenda[i].edad <= 35) {
+                adultos++;
+            } else if(agenda[i].edad > 35) {
+                mayores++;
             }
         }
-     }
-int grafico[MAX][3];
-for(int i=0; i<menores; i++){
-    printf("*",grafico[i][1]);
-    
-    for(int i=19; i>=0; i++){
-    for(int j =0; j<3; j++){
-        printf("      %d      ", grafico[i][j]);
     }
-    printf("  \n");
-}
-printf("  \n");
-printf("menores         adultos             mayores    \n");
 
+  ////
+    int graficoDatos[MAX][3];
+    for(int i=0; i<MAX; i++) {
+        if(i < menores) {
+            graficoDatos[i][0] = 1;
+        } else {
+            graficoDatos[i][0] = 0;
+        }
+        if(i < adultos) {
+            graficoDatos[i][1] = 1;
+        } else {
+            graficoDatos[i][1] = 0;
+        }
+        if(i < mayores) {
+            graficoDatos[i][2] = 1;
+        } else {
+            graficoDatos[i][2] = 0;
+        }
 
-
-
-    /*if(i<menores){
-
-grafico[i] [0]=1;
-    }else{
-    grafico[i] [0]=0;
     }
-    if(i<adultos){
-        grafico[i] [1]=1;
-    }else{
-    grafico[i] [1]=0;
-    }
-    if(i<mayores){
-        grafico[i] [2]=1;
-    }else{
-    grafico[i] [2]=0;
-    }
-}
+////
 
-for(int i=19; i>=0; i++){
-    for(int j =0; j<3; j++){
-        printf("      %d      ", grafico[i][j]);
-    }
-    printf("  \n");
-}
-printf("  \n");
-printf("menores         adultos             mayores    \n");*/
-}
+        for(int i = 9 ; i >= 0; i--){
+            for(int j = 0 ; j < 3 ; j++){
+               if(graficoDatos[i][j] == 1){
+
+                printf("       *        " );//, graficoDatos[i][j]);
+            }else{printf("                " );}
+            }
+            printf(" \n");
+        }
+
+
+      printf(" \n");
+      printf("menores a 19    entre 19 a 35     mayores a 35");
 }

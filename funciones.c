@@ -25,8 +25,11 @@ void printMenu()
 ////////////////////////////////////////////////////////////
 void alta(nada agenda[])
 {
+
     char nombre;
-    printf("Ingrese los datos: \n");
+    printf("\n                                           +---------------------------+\n");
+    printf("                                           ¦      INGRESE LOS DATOS:    ¦\n");
+    printf("                                           +---------------------------+\n");
     for(int i = 0 ; i < MAX ; i++)
     {
         if(agenda[i].status == VACIO)
@@ -39,11 +42,10 @@ void alta(nada agenda[])
             scanf("%s", agenda[i].nombre);
 
             printf("EDAD : "  );
-            scanf("%d", &agenda[i].edad);
+            scanf ("%d", &agenda[i].edad);
 
             printf("DNI : "  );
             scanf("%d", &agenda[i].dni);
-
 
             agenda[i].status = ACTIVO;
             break;
@@ -254,6 +256,9 @@ void Grafico(nada agenda [MAX])
     }
 ////
 
+    printf("                                           +---------------------------+\n");
+    printf("                                           ¦      GRAFICO DE EDADES     ¦\n");
+    printf("                                           +---------------------------+\n");
     for(int i = 19 ; i >= 0; i--)
     {
         for(int j = 0 ; j < 3 ; j++)
@@ -261,7 +266,9 @@ void Grafico(nada agenda [MAX])
             if(graficoDatos[i][j] == 1)
             {
 
-                printf("       *        " );//, graficoDatos[i][j]);
+                system("color 0F");
+                printf("       *        " );
+                system("color 0D");
             }
             else
             {
@@ -273,5 +280,10 @@ void Grafico(nada agenda [MAX])
 
 
     printf(" \n");
-    printf("menores a 19    entre 19 a 35     mayores a 35");
+    printf("---------------------------------------------------- \n");
+    printf("   menores a 19  | entre 19 a 35  |   mayores a 35    ");
+    printf("\n----------------------------------------------------");
 }
+
+
+

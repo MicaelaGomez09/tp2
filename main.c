@@ -40,6 +40,7 @@ int main()
         {
         case 1 :
             system("cls");
+            system("color 0C");
             alta(agenda);
             system ("cls");
             break;
@@ -50,17 +51,22 @@ int main()
             break;
         case 3 :
             system("cls");
+            system("color 0A");
             mostrar(agenda);
             getch();
             break;
         case 4 :
             system("cls");
+            system("color 0D");
             ordenarNombre(agenda);
             getch();
             break;
         case 5 :
             system("cls");
+            system("color 0E");
             Grafico(agenda);
+
+            system("color 0E");
             getch();
             break;
         case 6 :

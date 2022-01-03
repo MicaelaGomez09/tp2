@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-#define MAX 10
+#define MAX 20
 
 #define VACIO 0
 #define ACTIVO 1
@@ -20,15 +20,15 @@ struct nada{
 typedef struct nada nada ;
 
 void printMenu();
-void alta(nada agenda[10]);
-void baja(nada agenda[10]);
-void busqueda(nada agenda[10]);
-void mostrar(nada agenda[10]);
-int buscar(nada agenda[10]);
-void ordenamiento(nada agenda[10]);
-void mostrarOrdenado(nada agenda[10]);
-void ordenaChar(nada agenda[10]);
-void ordenarNombre(nada agenda [10]);
+void alta(nada agenda[MAX]);
+void baja(nada agenda[MAX]);
+void busqueda(nada agenda[MAX]);
+void mostrar(nada agenda[MAX]);
+int buscar(nada agenda[MAX]);
+void ordenamiento(nada agenda[MAX]);
+void mostrarOrdenado(nada agenda[MAX]);
+void ordenaChar(nada agenda[MAX]);
+void ordenarNombre(nada agenda [MAX]);
 void Grafico(nada agenda [MAX]);
 
 
@@ -37,7 +37,7 @@ int main()
 {
 
 
-    nada agenda[10];
+    nada agenda[MAX];
     init(agenda);
     char aux[20];
     char auxDniStr[30];
@@ -121,7 +121,7 @@ void printMenu(){
 }
 
 ////////////////////////////////////////////////////////////
-void alta(nada agenda[10]){
+void alta(nada agenda[MAX]){
     char nombre;
     printf("Ingrese los datos: \n");
     for(int i = 0 ; i < MAX ; i++){
@@ -148,7 +148,7 @@ void alta(nada agenda[10]){
 
 }
 ////////////////////////////////////////////////////////////
-void baja(nada agenda[10]){
+void baja(nada agenda[MAX]){
     printf("Baja \n");
     int posicion = buscar(agenda);
 
@@ -164,7 +164,7 @@ void baja(nada agenda[10]){
 }
 
 ///////////////////////////////////////////////////////////
-int buscar(nada agenda[10])
+int buscar(nada agenda[MAX])
 {
     int posicion = -1;
 
@@ -202,7 +202,7 @@ int buscar(nada agenda[10])
 }
 
 
-void init(nada agenda[10]){
+void init(nada agenda[MAX]){
     for(int i = 0 ; i < MAX ; i++){
        strcpy(agenda[i].nombre,"vacio");
        strcpy(agenda[i].apellido,"vacio");
@@ -213,7 +213,7 @@ void init(nada agenda[10]){
     }
 }
 ////////////////////////////////////////////////////////////////////
-void mostrar(nada agenda[10]){
+void mostrar(nada agenda[MAX]){
       printf("\n                                           +---------------------------+\n");
         printf("                                           ¦      LISTADO DE DATOS     ¦\n");
         printf("                                           +---------------------------+\n");
@@ -266,7 +266,7 @@ void ordenarNombre(nada agenda [MAX]){
         printf("                                      +-----------------------------------------------+\n");
     for(int i = 0 ; i < MAX ; i++){
         printf("                                                      %s %s \n ",
-               agenda[i].apellido,
+             agenda[i].apellido,
                agenda[i].nombre);
     }
 }
@@ -331,3 +331,9 @@ void Grafico(nada agenda [MAX]) {
       printf(" \n");
       printf("menores a 19    entre 19 a 35     mayores a 35");
 }
+
+
+
+
+
+
